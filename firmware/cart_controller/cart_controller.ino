@@ -33,8 +33,8 @@ const int PIN_ESTOP   = 34;   // input-only pin. Switch to GND = run, open = sto
                               // 10k pullup resistor to 3.3V on this line.
 
 // ---------------------------------------------------------- tuning knobs
-const float FOLLOW_DIST_M   = 2.5;   // how far behind you the cart holds
-const float DIST_DEADBAND_M = 0.25;  // don't twitch inside this window
+const float FOLLOW_DIST_M   = 2.0;   // how far behind you the cart holds
+const float DIST_DEADBAND_M = 0.5;  // don't twitch inside this window
 const float BEAR_DEADBAND_D = 4.0;   // ditto for steering
 
 const float KP_DIST = 0.55;          // distance error -> forward speed
@@ -142,11 +142,15 @@ void computeCommand(float dt) {
     return;
   }
 
-  // forward speed from distance error
-  float derr = g_dist - FOLLOW_DIST_M;
-  if (fabs(derr) < DIST_DEADBAND_M) derr = 0;
-  float v = clampf(KP_DIST * derr, -V_MAX * 0.4, V_MAX);
-  // note the asymmetric clamp: reverse is deliberately much slower than forward
+     // Forward-only, with hysteresis. The cart starts chasing when you get far
+  // enough away, and stops when it closes the gap -- it never backs up.
+  // Two different thresholds prevent it stuttering on and off at the boundary.
+    static bool chasing = false;
+    if (g_dist > FOLLOW_DIST_M + DIST_DEADBAND_M) chasing = true;
+    if (g_dist < FOLLOW_DIST_M)                   chasing = false;
+
+    float derr = chasing ? (g_dist - FOLLOW_DIST_M) : 0.0;
+    float v = clampf(KP_DIST * derr, 0.0, V_MAX);   // never negative
 
   // turn rate from bearing error
   float berr = g_bear;

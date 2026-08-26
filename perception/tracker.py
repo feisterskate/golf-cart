@@ -168,6 +168,13 @@ def track(focal_px, cam_index=0, serial_port=None, show=True):
             if show:
                 cv2.putText(frame, "TARGET LOST", (20, 40),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+            if ser and ser.in_waiting:
+                try:
+                    echo = ser.readline().decode(errors="ignore").strip()
+                    if echo:
+                        print(echo)
+                except Exception:
+                    pass    
 
         if show:
             cv2.line(frame, (w_frame // 2, 0), (w_frame // 2, h), (255, 255, 0), 1)
