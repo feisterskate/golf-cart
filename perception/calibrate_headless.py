@@ -18,7 +18,7 @@ import cv2
 import numpy as np
 
 MARKER_ID = 7
-MARKER_SIZE_M = 0.20      # <-- SET THIS to your printed marker's black square width
+MARKER_SIZE_M = 0.17      # <-- SET THIS to your printed marker's black square width
 DICT = cv2.aruco.DICT_4X4_50
 
 WIDTH, HEIGHT = 1280, 720
