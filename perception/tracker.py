@@ -196,6 +196,7 @@ if __name__ == "__main__":
     p.add_argument("--focal", type=float, default=None)
     p.add_argument("--cam", type=int, default=0)
     p.add_argument("--serial", type=str, default=None)
+    p.add_argument("--noshow", action="store_true")
     a = p.parse_args()
 
     if a.genmarker:
@@ -203,7 +204,7 @@ if __name__ == "__main__":
     elif a.calibrate:
         calibrate(a.cam)
     elif a.focal:
-        track(a.focal, a.cam, a.serial)
+        track(a.focal, a.cam, a.serial, show=not a.noshow)
     else:
         p.print_help()
         sys.exit(1)
