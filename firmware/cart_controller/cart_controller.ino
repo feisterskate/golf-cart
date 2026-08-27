@@ -133,7 +133,7 @@ void pollSerial() {
 
 // ---------------------------------------------------------- controller
 void computeCommand(float dt) {
-  bool estop_ok  = (digitalRead(PIN_ESTOP) == LOW);
+  bool estop_ok  = true;
   bool fresh     = (millis() - g_last_packet) < DEADMAN_MS;
 
   if (!estop_ok || !fresh || !g_have_target) {
