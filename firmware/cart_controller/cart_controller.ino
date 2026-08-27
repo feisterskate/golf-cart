@@ -33,8 +33,8 @@ const int PIN_ESTOP   = 34;   // input-only pin. Switch to GND = run, open = sto
                               // 10k pullup resistor to 3.3V on this line.
 
 // ---------------------------------------------------------- tuning knobs
-const float FOLLOW_DIST_M   = 2.0;   // how far behind you the cart holds
-const float DIST_DEADBAND_M = 0.5;  // don't twitch inside this window
+const float FOLLOW_DIST_M   = 1.2;   // how far behind you the cart holds
+const float DIST_DEADBAND_M = 0.4;  // don't twitch inside this window
 const float BEAR_DEADBAND_D = 4.0;   // ditto for steering
 
 const float KP_DIST = 0.55;          // distance error -> forward speed
