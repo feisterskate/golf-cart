@@ -24,7 +24,7 @@ import cv2
 import numpy as np
 
 MARKER_ID = 7
-MARKER_SIZE_M = 0.057      # physical width of the printed marker, in metres. MEASURE IT.
+MARKER_SIZE_M = 0.17      # physical width of the printed marker, in metres. MEASURE IT.
 DICT = cv2.aruco.DICT_4X4_50
 
 
