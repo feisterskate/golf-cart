@@ -15,11 +15,7 @@
  * while testing, and always bench-test with the wheels off the ground.
  */
 
-// ---------------------------------------------------------------- pins
-// GPIO25 and GPIO26 are the ESP32's only true DAC pins -- real analog out,
-// 0-3.3V, no RC filter needed. The ZS-X11H speed input accepts 0-5V analog,
-// so 3.3V max gives us roughly 66% of top speed. That is a feature here:
-// a hardware speed cap you cannot accidentally code your way past.
+
 const int PIN_L_SPEED = 25;   // DAC1 -> left driver speed input
 const int PIN_R_SPEED = 26;   // DAC2 -> right driver speed input
 
